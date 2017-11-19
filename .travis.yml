@@ -2,5 +2,4 @@ language: python
 python:
   - "3.6"
 script:
-  - python manage.py test polls
-  - coverage run --source='.' manage.py test mysite
+  - python manage.py test --cover-min-percentage 80
