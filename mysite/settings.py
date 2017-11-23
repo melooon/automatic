@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
+import raven
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_nose',
+    'raven.contrib.django.raven_compat',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,10 @@ NOSE_ARGS = [
     '--with-coverage',
     '--cover-package=polls',
 ]
+print(os.path.abspath(os.path.curdir))
+RAVEN_CONFIG = {
+    'dsn': 'https://235a661575c14b778ffa90b217f03c0c:44a9740ded39478ba3b50d7c8b6ce23e@sentry.io/248883',
+    # If you are using git, you can also automatically configure the
+    # release based on the git info.
+    'release': raven.fetch_git_sha(os.path.abspath(os.path.curdir)),
+}

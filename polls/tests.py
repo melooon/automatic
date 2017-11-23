@@ -122,3 +122,13 @@ class QuestionDetailViewTests(TestCase):
         url = reverse('polls:detail', args=(past_question.id,))
         response = self.client.get(url)
         self.assertContains(response, past_question.question_text)
+
+class QuestionResultsViewTests(TestCase):
+    def test_(self):
+        """
+        The Results view of the question
+        """
+        q = create_question(question_text="Past question 1.", days=-30)
+        choice = Choice.objects.create(q, "dqw")
+        response = self.client.post('/polls/vote', {"choice": choice.id})
+        self.assertEqual(response.status_code, 302)
